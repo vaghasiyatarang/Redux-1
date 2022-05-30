@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import ExtraComp from './ExtraComp'
+import { useSelector, useDispatch } from 'react-redux'
+import { incNumber, decNumber } from './action/index';
 
-function App() {
+const App = () => {
+
+  const mystate = useSelector((e) => e.changeTheNumber);
+
+  const dispatch = useDispatch();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="main">
+        
+        {console.log(mystate)}
+        <div>
+          <button className="buttoninc" onClick={() => dispatch(incNumber(5))}>Increment</button>
+          <span className='input'>{mystate}</span>
+          <button className="buttondec" onClick={() => dispatch(decNumber())}>Decrement</button>
+        </div>
+      </div>
+      <ExtraComp />
     </div>
   );
 }
